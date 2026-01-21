@@ -1,9 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Todo List</title>
     </head>
-    <body></body>
+    <body>
+        <header>
+            <nav>
+                <h1>Quick Todo</h1>
+            </nav>
+        </header>
+
+        <div class="main_container">
+            <div class="create_project_modal">
+                <h1>Create new project</h1>
+                <input
+                    type="text"
+                    placeholder="Project name"
+                    class="project_name_text"
+                />
+                <button class="create_project_button">Create Project</button>
+            </div>
+
+            <!-- Left "navigation" -->
+            <div class="left_navigation">
+                <div class="left_navigation_header">
+                    <h1>Projects</h1>
+                    <button class="create_project_btn">+</button>
+                </div>
+
+                <div class="sep"></div>
+
+                <div class="project_container">
+                    <button class="project_button inactive">
+                        Default Project
+                    </button>
+                </div>
+            </div>
+
+            <div class="right_content"></div>
+        </div>
+    </body>
 </html>

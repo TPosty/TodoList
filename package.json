@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": "webpack serve"
+        "dev": "webpack serve --config webpack.config.js"
     },
     "repository": {
         "type": "git",
@@ -13,7 +13,7 @@
     "keywords": [],
     "author": "",
     "license": "ISC",
-    "type": "commonjs",
+    "type": "module",
     "bugs": {
         "url": "https://github.com/TPosty/TodoList/issues"
     },
