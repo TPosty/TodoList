@@ -9,11 +9,16 @@ const open_project_create_popup = document.querySelector(
 const create_project_modal = document.querySelector(".create_project_modal");
 const modal_background = document.querySelector(".modal_background");
 const close_popup_btn = document.querySelector(".close_popup_btn");
+const add_todo = document.querySelector(".add_todo");
 
 (function () {
     const project_instance = new Project("Default Project");
     project_instance.create_default_project();
 })();
+
+add_todo.addEventListener("click", () => {
+    const project_instance = new Project();
+});
 
 const toggle_create_popup = () => {
     create_project_modal.classList.toggle("display_flex");

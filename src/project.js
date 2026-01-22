@@ -1,5 +1,4 @@
 import Display from "./display";
-const project_buttons = document.querySelectorAll(".project_button");
 
 export default class Project {
     constructor(project_name) {
@@ -15,7 +14,7 @@ export default class Project {
 
     handle_display_project_click(project) {
         console.log("Current project!!!", project);
-        this.active_project = project.id;
+        this.active_project = project;
     }
 
     create_default_project() {
