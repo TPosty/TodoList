@@ -18,6 +18,7 @@
     },
     "homepage": "https://github.com/TPosty/TodoList#readme",
     "devDependencies": {
+        "@iconify-json/codex": "^1.2.0",
         "css-loader": "^7.1.2",
         "html-loader": "^5.1.0",
         "style-loader": "^4.0.0",

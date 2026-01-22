@@ -1,12 +1,12 @@
 const project_container = document.querySelector(".project_container");
 
 export default class Display {
-    constructor(on_project_select) {
+    constructor(handle_display_project_click) {
         this.local_key = "projects";
         this.active_project = JSON.parse(
             localStorage.getItem(this.local_key),
         )[0];
-        this.on_project_select = on_project_select;
+        this.handle_display_project_click = handle_display_project_click;
     }
 
     display_projects() {
@@ -20,7 +20,7 @@ export default class Display {
             project_button.classList.add("project_button");
 
             project_button.addEventListener("click", () => {
-                this.on_project_select(project);
+                this.handle_display_project_click(project);
             });
 
             project_container.appendChild(project_button);

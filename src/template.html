@@ -13,8 +13,28 @@
         </header>
 
         <div class="main_container">
+            <div class="modal_background"></div>
             <div class="create_project_modal">
-                <h1>Create new project</h1>
+                <div class="create_project_header">
+                    <h1>Create project</h1>
+                    <button class="close_popup_btn">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-width="2"
+                                d="m8 8l4 4m0 0l4 4m-4-4l4-4m-4 4l-4 4"
+                            />
+                        </svg>
+                    </button>
+                </div>
+
                 <input
                     type="text"
                     placeholder="Project name"
@@ -27,7 +47,7 @@
             <div class="left_navigation">
                 <div class="left_navigation_header">
                     <h1>Projects</h1>
-                    <button class="create_project_btn">+</button>
+                    <button class="open_project_create_popup">+</button>
                 </div>
 
                 <div class="sep"></div>

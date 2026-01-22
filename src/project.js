@@ -7,14 +7,15 @@ export default class Project {
         this.project_id = crypto.randomUUID();
         this.todos = [];
         this.local_key = "projects";
-        this.display = new Display(this.test_display_click);
+        this.display = new Display(this.handle_display_project_click);
         this.active_project = JSON.parse(
             localStorage.getItem(this.local_key),
         )[0];
     }
 
-    test_display_click() {
-        console.log(this.display.display_projects);
+    handle_display_project_click(project) {
+        console.log("Current project!!!", project);
+        this.active_project = project.id;
     }
 
     create_default_project() {
