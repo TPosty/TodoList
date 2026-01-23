@@ -11,13 +11,21 @@ const modal_background = document.querySelector(".modal_background");
 const close_popup_btn = document.querySelector(".close_popup_btn");
 const add_todo = document.querySelector(".add_todo");
 
+const project_instance = new Project();
+
 (function () {
-    const project_instance = new Project("Default Project");
-    project_instance.create_default_project();
+    project_instance.create_project("Default Project");
 })();
 
 add_todo.addEventListener("click", () => {
-    const project_instance = new Project();
+    project_instance.add_todo(
+        "New Task",
+        crypto.randomUUID(),
+        "This is a description of the task",
+        "01/27/2026",
+        1,
+        false,
+    );
 });
 
 const toggle_create_popup = () => {
@@ -36,8 +44,6 @@ close_popup_btn.addEventListener("click", () => {
 
 create_project_button.addEventListener("click", () => {
     const project_name = project_name_text.value;
-    const project_instance = new Project(project_name);
-
-    project_instance.add_user_created_project();
+    project_instance.create_project(project_name);
     toggle_create_popup();
 });
