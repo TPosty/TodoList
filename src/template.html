@@ -44,6 +44,67 @@
                 <button class="create_project_button">Create Project</button>
             </div>
 
+            <div class="add_todo_popup">
+                <div class="create_project_header">
+                    <h1>Create task</h1>
+                    <button class="close_popup_btn">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-width="2"
+                                d="m8 8l4 4m0 0l4 4m-4-4l4-4m-4 4l-4 4"
+                            />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="task_form_inputs">
+                    <div class="input_div">
+                        <label for="task_name">Task name</label>
+                        <input type="text" name="task_name" class="task_name" />
+                    </div>
+
+                    <div class="input_div">
+                        <label>Task description</label>
+                        <textarea
+                            name="task_desc"
+                            class="task_desc"
+                            id=""
+                        ></textarea>
+                    </div>
+
+                    <div class="half_input_div">
+                        <div class="input_div half">
+                            <label>Due Date</label>
+                            <input type="date" class="task_due_date" />
+                        </div>
+                        <div class="input_div half">
+                            <label>Priority</label>
+                            <select class="task_priority" name="due_date">
+                                <option value="low_priority">
+                                    Low Priority
+                                </option>
+                                <option value="low_priority">
+                                    Medium Priority
+                                </option>
+                                <option value="low_priority">
+                                    High Priority
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="add_task_button">Submit</button>
+                </div>
+            </div>
+
             <!-- Left "navigation" -->
             <div class="left_navigation">
                 <div class="left_navigation_header">

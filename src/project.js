@@ -28,7 +28,6 @@ export default class Project {
 
     handle_display_project_click(project) {
         this.active_project = project;
-        console.log(this.active_project);
     }
 
     create_project(project_name) {

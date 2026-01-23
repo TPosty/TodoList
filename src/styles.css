@@ -155,6 +155,111 @@ nav {
     border-color: #94a3b8;
 }
 
+/* Add task popup */
+.add_todo_popup {
+    position: absolute;
+    height: auto;
+    width: auto;
+    min-width: 400px;
+    max-width: 500px;
+    background-color: white;
+    padding: 10px 20px 30px 20px;
+    display: flex;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 1001;
+}
+
+.add_todo_popup input {
+    height: 30px;
+    font-size: 18px;
+    padding-left: 6px;
+    font-family: "Montserrat", sans-serif;
+    border-radius: 4px;
+    border: 1px solid #d1d5db;
+}
+
+.add_todo_popup select {
+    height: 30px;
+    font-size: 18px;
+    padding-left: 6px;
+    padding-right: 30px;
+    font-family: "Montserrat", sans-serif;
+
+    border-radius: 4px;
+    border: 1px solid #d1d5db;
+    background-color: #fff;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    cursor: pointer;
+}
+
+.add_todo_popup select:focus {
+    outline: none;
+}
+
+.add_task_button {
+    height: 40px;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    background-color: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #1f2937;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.add_task_button:hover {
+    background-color: #e2e8f0; /* slightly darker on hover */
+    border-color: #94a3b8;
+}
+
+.add_todo_popup label {
+    margin-bottom: 5px;
+}
+
+.add_todo_popup textarea {
+    resize: none;
+    padding: 8px;
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    border-radius: 4px;
+    border: 1px solid #d1d5db;
+    height: 100px;
+}
+
+.add_todo_popup textarea:focus {
+    outline: none;
+}
+
+.add_todo_popup input:focus {
+    outline: none;
+}
+
+.input_div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.half_input_div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 /* Utility Classes */
 .sep {
     width: 100%;
@@ -162,6 +267,10 @@ nav {
     height: 2px;
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.half {
+    width: 48%;
 }
 
 .display_flex {

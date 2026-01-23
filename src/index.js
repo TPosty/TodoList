@@ -11,6 +11,12 @@ const modal_background = document.querySelector(".modal_background");
 const close_popup_btn = document.querySelector(".close_popup_btn");
 const add_todo = document.querySelector(".add_todo");
 
+// Create task input values
+const task_name = document.querySelector(".task_name");
+const task_desc = document.querySelector(".task_desc");
+const task_due_date = document.querySelector(".task_due_date");
+const task_priority = document.querySelector(".task_priority");
+
 const project_instance = new Project();
 
 (function () {
@@ -19,11 +25,11 @@ const project_instance = new Project();
 
 add_todo.addEventListener("click", () => {
     project_instance.add_todo(
-        "New Task",
+        task_name.value,
         crypto.randomUUID(),
-        "This is a description of the task",
-        "01/27/2026",
-        1,
+        task_desc.value,
+        task_due_date.value,
+        task_priority.value,
         false,
     );
 });
