@@ -9,7 +9,6 @@
         <header>
             <nav>
                 <h1>Quick Todo</h1>
-                <button class="add_todo">Add</button>
             </nav>
         </header>
 
@@ -47,7 +46,7 @@
             <div class="add_todo_popup">
                 <div class="create_project_header">
                     <h1>Create task</h1>
-                    <button class="close_popup_btn">
+                    <button class="close_popup_btn_task">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="32"
@@ -91,10 +90,10 @@
                                 <option value="low_priority">
                                     Low Priority
                                 </option>
-                                <option value="low_priority">
+                                <option value="medium_priority">
                                     Medium Priority
                                 </option>
-                                <option value="low_priority">
+                                <option value="high_priority">
                                     High Priority
                                 </option>
                             </select>
@@ -106,22 +105,39 @@
             </div>
 
             <!-- Left "navigation" -->
-            <div class="left_navigation">
-                <div class="left_navigation_header">
-                    <h1>Projects</h1>
-                    <button class="open_project_create_popup">+</button>
+            <div class="main_content_container">
+                <div class="left_navigation">
+                    <div class="left_navigation_header">
+                        <h1>Projects</h1>
+                        <button class="open_project_create_popup">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                            >
+                                <!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE -->
+                                <path
+                                    fill="currentColor"
+                                    d="M14 16h2v-2h2v-2h-2v-2h-2v2h-2v2h2zM4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h6l2 2h8q.825 0 1.413.588T22 8v10q0 .825-.587 1.413T20 20z"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="sep"></div>
+
+                    <div class="project_container"></div>
                 </div>
 
-                <div class="sep"></div>
-
-                <div class="project_container">
-                    <button class="project_button inactive">
-                        Default Project
-                    </button>
+                <div class="right_content">
+                    <div class="content_header">
+                        <h1 class="current_project"></h1>
+                        <button class="add_todo">Add</button>
+                    </div>
+                    <div class="todo_container"></div>
                 </div>
             </div>
-
-            <div class="right_content"></div>
         </div>
     </body>
 </html>

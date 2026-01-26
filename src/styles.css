@@ -24,16 +24,17 @@ header {
 nav {
     width: 100%;
     height: 80px;
-    background-color: white;
+    background-color: #747b9e;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #e2e8f0;
+    color: white;
 }
 
 .left_navigation {
-    width: 20%;
+    flex: 2;
     min-height: calc(100vh - 80px);
+    max-width: 300px;
     background-color: white;
     display: flex;
     justify-content: start;
@@ -50,10 +51,18 @@ nav {
     align-items: center;
 }
 
-.left_navigation button {
-    height: 30px;
-    width: 30px;
+.open_project_create_popup {
+    height: auto;
+    width: auto;
     cursor: pointer;
+    background-color: #747b9e;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    color: white;
+    border-radius: 6px;
 }
 
 .project_container {
@@ -137,22 +146,16 @@ nav {
 
 .create_project_button {
     height: 40px;
-    background-color: transparent;
     border: none;
-    background-color: #f1f5f9;
-    border: 1px solid #cbd5e1;
-    color: #1f2937;
+    background-color: #747b9e;
+    border: none;
+    color: #fff;
     padding: 8px 16px;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 16px;
     font-weight: bold;
-}
-
-.create_project_button:hover {
-    background-color: #e2e8f0; /* slightly darker on hover */
-    border-color: #94a3b8;
 }
 
 /* Add task popup */
@@ -164,7 +167,7 @@ nav {
     max-width: 500px;
     background-color: white;
     padding: 10px 20px 30px 20px;
-    display: flex;
+    display: none;
     flex-direction: column;
     top: 50%;
     left: 50%;
@@ -210,24 +213,24 @@ nav {
     width: 100%;
     background-color: transparent;
     border: none;
-    background-color: #f1f5f9;
-    border: 1px solid #cbd5e1;
-    color: #1f2937;
+    background-color: #747b9e;
+    color: white;
     padding: 8px 16px;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 16px;
     font-weight: bold;
-}
-
-.add_task_button:hover {
-    background-color: #e2e8f0; /* slightly darker on hover */
-    border-color: #94a3b8;
+    margin-top: 10px;
 }
 
 .add_todo_popup label {
     margin-bottom: 5px;
+}
+
+.no_todo_text {
+    font-size: 22px;
+    text-align: center;
 }
 
 .add_todo_popup textarea {
@@ -238,6 +241,27 @@ nav {
     border-radius: 4px;
     border: 1px solid #d1d5db;
     height: 100px;
+}
+
+.add_todo {
+    height: 40px;
+    width: 160px;
+    border: none;
+    background-color: #747b9e;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.close_popup_btn_task {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 .add_todo_popup textarea:focus {
@@ -258,6 +282,112 @@ nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+/* Main content */
+.main_content_container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.right_content {
+    height: auto;
+    flex: 8;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.content_header {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.todo_container {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.todo {
+    width: 100%;
+    background-color: white;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: stretch;
+    min-height: 80px;
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease,
+        max-height 0.25s ease,
+        margin 0.25s ease,
+        padding 0.25s ease;
+    opacity: 1;
+}
+
+.todo.deleting {
+    opacity: 0;
+    transform: scale(0.95);
+    max-height: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    overflow: hidden;
+}
+
+.todo_priority_color_indicator {
+    width: 6px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    flex-shrink: 0;
+}
+
+.todo_content {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.todo_content_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.todo_content_description {
+    width: 95%;
+    margin-top: 10px;
+}
+
+.todo_content h3,
+.todo_content p {
+    margin: 0;
+}
+
+.todo_delete_button {
+    min-width: 100px;
+    background-color: #747b9e;
+    border: none;
+    cursor: pointer;
+    color: white;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
 }
 
 /* Utility Classes */
@@ -281,17 +411,50 @@ nav {
     display: none;
 }
 
+.low_priority {
+    background-color: #6fa386;
+}
+
+.medium_priority {
+    background-color: #d4b15a;
+}
+
+.high_priority {
+    background-color: #b76b6b;
+}
+
 .project_button {
     margin-top: 5px;
     margin-bottom: 5px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    cursor: pointer;
+}
+
+.project_button p {
+    font-size: 18px;
+    margin-left: 10px;
+    font-weight: 500;
 }
 
 .active {
-    background-color: green !important;
+    background-color: #747b9e !important;
+    color: white;
 }
 
 .inactive {
+    background-color: #f5f6fa;
+    color: #4b5563;
+    border: 1px solid #d1d5db;
+    transition:
+        background-color 0.2s,
+        color 0.2s;
+}
+
+.inactive:hover {
     background-color: #e2e8f0;
+    color: #1f2937;
 }
 
 .close_popup_btn {
@@ -307,4 +470,30 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .todo {
+        flex-direction: column;
+    }
+
+    .todo_priority_color_indicator {
+        width: 100%;
+        height: 6px;
+        border-radius: 6px 6px 0 0;
+    }
+
+    .todo_delete_button {
+        width: 100%;
+        border-left: none;
+        border-top: 4px solid #f8fafc;
+        border-radius: 0 0 6px 6px;
+        padding: 10px;
+    }
+
+    .todo_content_header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }

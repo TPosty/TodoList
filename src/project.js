@@ -8,9 +8,14 @@ export default class Project {
         this.local_key = "projects";
         this.handle_display_project_click =
             this.handle_display_project_click.bind(this);
-        this.display = new Display(this.handle_display_project_click);
-        let projects = JSON.parse(localStorage.getItem(this.local_key));
 
+        this.display = new Display(
+            this.handle_display_project_click,
+            this.delete_todo,
+        );
+
+        let projects = JSON.parse(localStorage.getItem(this.local_key));
+        console.log(projects);
         if (!projects) {
             projects = [
                 {
@@ -23,15 +28,20 @@ export default class Project {
             localStorage.setItem(this.local_key, JSON.stringify(projects));
         }
 
+        this.projects = projects;
         this.active_project = projects[0];
+        this.display.display_projects(this.projects, this.active_project);
+        this.display.display_project_todos(this.active_project.id);
     }
 
-    handle_display_project_click(project) {
+    handle_display_project_click = (project) => {
         this.active_project = project;
-    }
+        this.display.display_projects(this.projects, this.active_project);
+        this.display.display_project_todos(this.active_project.id);
+    };
 
     create_project(project_name) {
-        this.display.display_projects();
+        this.display.display_projects(this.projects, this.active_project);
         const stored_projects = localStorage.getItem(this.local_key);
         const projects = stored_projects ? JSON.parse(stored_projects) : [];
 
@@ -49,7 +59,7 @@ export default class Project {
 
         localStorage.setItem(this.local_key, JSON.stringify(projects));
 
-        this.display.display_projects();
+        this.display.display_projects(this.projects, this.active_project);
     }
 
     add_todo(name, id, description, due_date, priority, completed) {
@@ -62,8 +72,6 @@ export default class Project {
             completed,
         );
 
-        console.log(new_todo);
-
         const stored_projects = JSON.parse(
             localStorage.getItem(this.local_key),
         );
@@ -75,5 +83,27 @@ export default class Project {
         stored_projects[array_index].todos.push(new_todo);
 
         localStorage.setItem(this.local_key, JSON.stringify(stored_projects));
+
+        this.display.display_project_todos(this.active_project.id);
     }
+
+    delete_todo = (id, active_project_id) => {
+        const stored_projects = JSON.parse(
+            localStorage.getItem(this.local_key),
+        );
+
+        const object_index = stored_projects.findIndex(
+            (obj) => obj.id == active_project_id,
+        );
+
+        const todo_index = stored_projects[object_index].todos.findIndex(
+            (todo) => todo.id == id,
+        );
+
+        stored_projects[object_index].todos.splice(todo_index, 1);
+
+        localStorage.setItem(this.local_key, JSON.stringify(stored_projects));
+        console.log(this.active_project);
+        this.display.display_project_todos(active_project_id);
+    };
 }
