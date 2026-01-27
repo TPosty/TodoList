@@ -57,7 +57,7 @@ export default class Display {
 
             const todo_priority_color_indicator = document.createElement("div");
             todo_priority_color_indicator.classList.add(
-                "todo_priority_color_indicator",
+                "todo_priority_color_indicator"
             );
 
             if (todo.priority == "low_priority") {

@@ -5,7 +5,7 @@ import Display from "./display.js";
 const create_project_button = document.querySelector(".create_project_button");
 const project_name_text = document.querySelector(".project_name_text");
 const open_project_create_popup = document.querySelector(
-    ".open_project_create_popup",
+    ".open_project_create_popup"
 );
 const create_project_modal = document.querySelector(".create_project_modal");
 const modal_background = document.querySelector(".modal_background");
@@ -75,8 +75,12 @@ add_task_button.addEventListener("click", () => {
             task_desc.value,
             task_due_date.value,
             task_priority.value,
-            false,
+            false
         );
+
+        console.log("Passed ID:", id);
+        console.log("Todo ID:", new_todo.id);
+        console.log(new_todo);
 
         reset_field_values();
         toggle_create_task_popup();
