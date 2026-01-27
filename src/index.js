@@ -1,5 +1,6 @@
 import "./styles.css";
 import Project from "./project.js";
+import Display from "./display.js";
 
 const create_project_button = document.querySelector(".create_project_button");
 const project_name_text = document.querySelector(".project_name_text");
@@ -50,7 +51,6 @@ close_popup_btn.addEventListener("click", () => {
 const toggle_create_task_popup = () => {
     add_todo_popup.classList.toggle("display_flex");
     modal_background.classList.toggle("display_flex");
-    // project_name_text.value = "";
 };
 
 add_todo.addEventListener("click", () => {

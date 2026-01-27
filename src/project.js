@@ -15,7 +15,6 @@ export default class Project {
         );
 
         let projects = JSON.parse(localStorage.getItem(this.local_key));
-        console.log(projects);
         if (!projects) {
             projects = [
                 {
@@ -35,31 +34,41 @@ export default class Project {
     }
 
     handle_display_project_click = (project) => {
+        const stored_projects = localStorage.getItem(this.local_key);
+        const projects_local = stored_projects
+            ? JSON.parse(stored_projects)
+            : [];
+
         this.active_project = project;
+        // this.projects = projects_local;
+        console.log("projects local");
+        console.log(projects_local);
+        console.log("this.projects");
+        console.log(this.projects);
         this.display.display_projects(this.projects, this.active_project);
         this.display.display_project_todos(this.active_project.id);
     };
 
     create_project(project_name) {
-        this.display.display_projects(this.projects, this.active_project);
+        // this.display.display_projects(this.projects, this.active_project);
         const stored_projects = localStorage.getItem(this.local_key);
-        const projects = stored_projects ? JSON.parse(stored_projects) : [];
+        const projects_local = stored_projects
+            ? JSON.parse(stored_projects)
+            : [];
 
-        const default_project_exists = projects.some(
+        const default_project_exists = projects_local.some(
             (p_name) => p_name.name === project_name,
         );
 
         if (default_project_exists) return;
-
-        projects.push({
+        projects_local.push({
             name: project_name,
             id: this.project_id,
             todos: [],
         });
-
-        localStorage.setItem(this.local_key, JSON.stringify(projects));
-
-        this.display.display_projects(this.projects, this.active_project);
+        localStorage.setItem(this.local_key, JSON.stringify(projects_local));
+        console.log(projects_local);
+        this.display.display_projects(projects_local, this.active_project);
     }
 
     add_todo(name, id, description, due_date, priority, completed) {
@@ -103,7 +112,6 @@ export default class Project {
         stored_projects[object_index].todos.splice(todo_index, 1);
 
         localStorage.setItem(this.local_key, JSON.stringify(stored_projects));
-        console.log(this.active_project);
         this.display.display_project_todos(active_project_id);
     };
 }
