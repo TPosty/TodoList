@@ -57,16 +57,16 @@ export default class Display {
 
         const current_project = projects.find((item) => item.id === project_id);
 
-        todo_container.innerHTML = ``;
+        // todo_container.innerHTML = ``;
 
-        if (current_project.todos.length <= 0) {
-            const no_todo_text = document.createElement("p");
-            no_todo_text.textContent =
-                "No tasks found! Click the add button to start adding tasks.";
-            no_todo_text.classList.add("no_todo_text");
-            todo_container.appendChild(no_todo_text);
-            return;
-        }
+        // if (current_project.todos.length <= 0) {
+        //     const no_todo_text = document.createElement("p");
+        //     no_todo_text.textContent =
+        //         "No tasks found! Click the add button to start adding tasks.";
+        //     no_todo_text.classList.add("no_todo_text");
+        //     todo_container.appendChild(no_todo_text);
+        //     return;
+        // }
 
         for (let todo of current_project.todos) {
             const todo_display = document.createElement("div");
@@ -91,6 +91,11 @@ export default class Display {
             const todo_content = document.createElement("div");
             todo_content.classList.add("todo_content");
             todo_display.appendChild(todo_content);
+
+            // NEED TO FIGURE THIS OUT.
+            const todo_checkbox = document.createElement("input");
+            todo_checkbox.type = "checkbox";
+            todo_content.appendChild(todo_checkbox);
 
             const todo_content_header = document.createElement("div");
             todo_content_header.classList.add("todo_content_header");

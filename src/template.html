@@ -182,7 +182,53 @@
 
                         <button class="add_todo">Add Task</button>
                     </div>
-                    <div class="todo_container"></div>
+                    <div class="todo_container">
+                        <div class="todo">
+                            <!-- Priority color indicator -->
+                            <!-- One of: low_priority | medium_priority | high_priority -->
+                            <div
+                                class="todo_priority_color_indicator low_priority"
+                            ></div>
+                            <div class="todo_checkbox">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" />
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="todo_content">
+                                <!-- Checkbox -->
+
+                                <!-- Header -->
+                                <div class="todo_content_header">
+                                    <h3 class="todo_title">Todo Name</h3>
+                                    <p class="todo_due_date">
+                                        Due date: YYYY-MM-DD
+                                    </p>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="todo_content_description">
+                                    <p>Todo description goes here</p>
+                                </div>
+                            </div>
+
+                            <!-- Delete button -->
+                            <button class="todo_delete_button">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="26"
+                                    height="26"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <!-- Icon from Material Symbols by Google -->
+                                    <path
+                                        fill="currentColor"
+                                        d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zm2-4h2V8H9zm4 0h2V8h-2z"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

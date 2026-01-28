@@ -370,6 +370,66 @@ nav {
     margin-top: 4px;
 }
 
+.todo_checkbox {
+    width: 8%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container */
+.custom-checkbox {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Hide native checkbox but keep it accessible */
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Custom box */
+.checkmark {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    background-color: white;
+    display: grid;
+    place-items: center;
+    transition: all 0.2s ease;
+}
+
+/* Checkmark icon */
+.checkmark::after {
+    content: "";
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) scale(0);
+    transition: transform 0.15s ease;
+}
+
+/* Checked state */
+.custom-checkbox input:checked + .checkmark {
+    background-color: #747b9e;
+    border-color: #747b9e;
+}
+
+.custom-checkbox input:checked + .checkmark::after {
+    transform: rotate(45deg) scale(1);
+}
+
+/* Focus state (keyboard users) */
+.custom-checkbox input:focus-visible + .checkmark {
+    outline: 2px solid #6366f1;
+    outline-offset: 2px;
+}
+
 .todo_content_description {
     width: 95%;
     margin-top: 10px;
