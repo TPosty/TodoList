@@ -11,7 +11,7 @@ export default class Project {
 
         this.display = new Display(
             this.handle_display_project_click,
-            this.delete_todo
+            this.delete_todo,
         );
 
         let projects = JSON.parse(localStorage.getItem(this.local_key));
@@ -40,24 +40,18 @@ export default class Project {
             : [];
 
         this.active_project = project;
-        // this.projects = projects_local;
-        // console.log("projects local");
-        // console.log(projects_local);
-        // console.log("this.projects");
-        // console.log(this.projects);
         this.display.display_projects(this.projects, this.active_project);
         this.display.display_project_todos(this.active_project.id);
     };
 
     create_project(project_name) {
-        // this.display.display_projects(this.projects, this.active_project);
         const stored_projects = localStorage.getItem(this.local_key);
         const projects_local = stored_projects
             ? JSON.parse(stored_projects)
             : [];
 
         const default_project_exists = projects_local.some(
-            (p_name) => p_name.name === project_name
+            (p_name) => p_name.name === project_name,
         );
 
         if (default_project_exists) return;
@@ -67,10 +61,21 @@ export default class Project {
             todos: [],
         });
         localStorage.setItem(this.local_key, JSON.stringify(projects_local));
-
+        // Sets the active_project to the most recently created project
+        this.active_project = projects_local[projects_local.length - 1];
         this.display.display_projects(projects_local, this.active_project);
         this.projects = projects_local;
     }
+
+    delete_project = (id) => {
+        const stored_projects = JSON.parse(
+            localStorage.getItem(this.local_key),
+        );
+
+        const object_index = stored_projects.findIndex((obj) => obj.id == id);
+
+        console.log(object_index);
+    };
 
     add_todo(name, id, description, due_date, priority, completed) {
         const new_todo = new Todo(
@@ -79,15 +84,15 @@ export default class Project {
             description,
             due_date,
             priority,
-            completed
+            completed,
         );
 
         const stored_projects = JSON.parse(
-            localStorage.getItem(this.local_key)
+            localStorage.getItem(this.local_key),
         );
 
         const array_index = stored_projects.findIndex(
-            (obj) => obj.id == this.active_project.id
+            (obj) => obj.id == this.active_project.id,
         );
 
         stored_projects[array_index].todos.push(new_todo);
@@ -99,15 +104,15 @@ export default class Project {
 
     delete_todo = (id, active_project_id) => {
         const stored_projects = JSON.parse(
-            localStorage.getItem(this.local_key)
+            localStorage.getItem(this.local_key),
         );
 
         const object_index = stored_projects.findIndex(
-            (obj) => obj.id == active_project_id
+            (obj) => obj.id == active_project_id,
         );
 
         const todo_index = stored_projects[object_index].todos.findIndex(
-            (todo) => todo.id == id
+            (todo) => todo.id == id,
         );
 
         stored_projects[object_index].todos.splice(todo_index, 1);
