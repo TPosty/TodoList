@@ -31,7 +31,7 @@ export default class Display {
             `;
             project_button.classList.add("project_button");
 
-            if (project === active_project) {
+            if (active_project && project === active_project) {
                 project_button.classList.add("active");
                 current_project_display_text.textContent = active_project.name;
             } else {
@@ -44,6 +44,12 @@ export default class Display {
 
             project_container.appendChild(project_button);
         }
+    }
+
+    display_empty_project_state() {
+        const no_projects = document.createElement("p");
+        no_projects.innerHTML = `Please add a project above!`;
+        project_container.appendChild(no_projects);
     }
 
     display_project_todos(project_id) {

@@ -1,5 +1,6 @@
 import Display from "./display";
 import Todo from "./todo";
+const filter_buttons = document.querySelectorAll(".filter_button");
 
 export default class Project {
     constructor() {
@@ -18,23 +19,71 @@ export default class Project {
         );
 
         let projects = JSON.parse(localStorage.getItem(this.local_key));
-        if (!projects) {
-            projects = [
-                {
-                    name: "Default Project",
-                    id: this.project_id,
-                    todos: [],
-                },
-            ];
-
-            localStorage.setItem(this.local_key, JSON.stringify(projects));
-        }
 
         this.projects = projects;
-        this.active_project = projects[0];
-        this.display.display_projects(this.projects, this.active_project);
-        this.display.display_project_todos(this.active_project.id);
+        this.active_project = null;
+
+        if (!projects) {
+            projects = [];
+            localStorage.setItem(this.local_key, JSON.stringify(projects));
+        } else {
+            this.active_project = projects[0];
+        }
+
+        if (this.active_project) {
+            this.display.display_projects(this.projects, this.active_project);
+        } else {
+            this.display.display_empty_project_state();
+        }
+        if (this.active_project == null) {
+            return;
+        } else {
+            this.display.display_project_todos(this.active_project.id);
+        }
+
+        filter_buttons.forEach((button) => {
+            console.log(button.dataset.filter);
+            button.addEventListener("click", (e) => {
+                filter_buttons.forEach((btn) => btn.classList.remove("active"));
+                e.currentTarget.classList.add("active");
+                if (button.dataset.filter == "az") {
+                    this.filter_todos("AZ");
+                    button.classList.add("active");
+                } else if (button.dataset.filter == "za") {
+                    this.filter_todos("ZA");
+                } else {
+                    return;
+                }
+            });
+        });
     }
+
+    filter_todos = (filter_type) => {
+        const stored_projects = JSON.parse(
+            localStorage.getItem(this.local_key),
+        );
+
+        const current_project_id = this.active_project.id;
+
+        const object_index = stored_projects.findIndex(
+            (obj) => obj.id == current_project_id,
+        );
+
+        if (filter_type == "AZ") {
+            stored_projects[object_index].todos = stored_projects[
+                object_index
+            ].todos.sort((a, b) => a.name.localeCompare(b.name));
+        } else if (filter_type == "ZA") {
+            stored_projects[object_index].todos = stored_projects[
+                object_index
+            ].todos
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .reverse();
+        }
+
+        localStorage.setItem(this.local_key, JSON.stringify(stored_projects));
+        this.display.display_project_todos(current_project_id);
+    };
 
     handle_display_project_click = (project) => {
         const stored_projects = localStorage.getItem(this.local_key);
@@ -48,16 +97,12 @@ export default class Project {
     };
 
     create_project(project_name) {
+        console.log(project_name);
         const stored_projects = localStorage.getItem(this.local_key);
         const projects_local = stored_projects
             ? JSON.parse(stored_projects)
             : [];
 
-        const default_project_exists = projects_local.some(
-            (p_name) => p_name.name === project_name,
-        );
-
-        if (default_project_exists) return;
         projects_local.push({
             name: project_name,
             id: this.project_id,
@@ -66,12 +111,15 @@ export default class Project {
         localStorage.setItem(this.local_key, JSON.stringify(projects_local));
         // Sets the active_project to the most recently created project
         this.active_project = projects_local[projects_local.length - 1];
+
         this.display.display_projects(projects_local, this.active_project);
         this.projects = projects_local;
+        this.display.display_project_todos(this.active_project.id);
     }
 
     delete_project = () => {
         const id = this.active_project.id;
+        console.log(id);
 
         const stored_projects = JSON.parse(
             localStorage.getItem(this.local_key),
@@ -91,6 +139,7 @@ export default class Project {
 
         localStorage.setItem(this.local_key, JSON.stringify(stored_projects));
         this.display.display_projects(stored_projects, this.active_project);
+        this.display.display_project_todos(this.active_project.id);
     };
 
     add_todo(name, id, description, due_date, priority, completed) {

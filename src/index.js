@@ -23,10 +23,6 @@ const add_task_button = document.querySelector(".add_task_button");
 
 const project_instance = new Project();
 
-(function () {
-    project_instance.create_project("Default Project");
-})();
-
 const reset_field_values = () => {
     task_name.value = "";
     task_desc.value = "";
