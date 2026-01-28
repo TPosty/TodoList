@@ -255,7 +255,6 @@ nav {
     transition: all 0.2s ease;
     font-size: 16px;
     font-weight: bold;
-    margin-top: 10px;
 }
 
 .close_popup_btn_task {
@@ -308,6 +307,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 22px;
+    margin-top: 0px;
 }
 
 .todo_container {
@@ -388,6 +388,32 @@ nav {
     color: white;
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
+}
+
+/* Current project header stuff */
+.current_project_header {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.current_project {
+    color: #4b5563;
+}
+
+.delete_project_button {
+    background-color: transparent;
+    border: none;
+    color: #4b5563;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Utility Classes */

@@ -1,16 +1,28 @@
 const project_container = document.querySelector(".project_container");
 const todo_container = document.querySelector(".todo_container");
 const current_project_display_text = document.querySelector(".current_project");
+const delete_project_button = document.querySelector(".delete_project_button");
 
 export default class Display {
-    constructor(handle_display_project_click, handle_todo_delete) {
+    constructor(
+        handle_display_project_click,
+        handle_todo_delete,
+        delete_project,
+    ) {
         this.local_key = "projects";
         this.handle_display_project_click = handle_display_project_click;
         this.handle_todo_delete = handle_todo_delete;
+        this.delete_project = delete_project;
+
+        delete_project_button.addEventListener("click", () => {
+            this.delete_project();
+        });
     }
 
     display_projects(projects, active_project) {
         project_container.innerHTML = "";
+
+        console.log(projects);
 
         for (let project of projects) {
             const project_button = document.createElement("button");
@@ -57,7 +69,7 @@ export default class Display {
 
             const todo_priority_color_indicator = document.createElement("div");
             todo_priority_color_indicator.classList.add(
-                "todo_priority_color_indicator"
+                "todo_priority_color_indicator",
             );
 
             if (todo.priority == "low_priority") {

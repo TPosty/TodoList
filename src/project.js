@@ -9,9 +9,12 @@ export default class Project {
         this.handle_display_project_click =
             this.handle_display_project_click.bind(this);
 
+        this.delete_project = this.delete_project.bind(this);
+
         this.display = new Display(
             this.handle_display_project_click,
             this.delete_todo,
+            this.delete_project,
         );
 
         let projects = JSON.parse(localStorage.getItem(this.local_key));
@@ -67,14 +70,27 @@ export default class Project {
         this.projects = projects_local;
     }
 
-    delete_project = (id) => {
+    delete_project = () => {
+        const id = this.active_project.id;
+
         const stored_projects = JSON.parse(
             localStorage.getItem(this.local_key),
         );
 
+        if (stored_projects.length <= 1) {
+            console.log("Cannot delete since it's one left!");
+            return;
+        }
+
         const object_index = stored_projects.findIndex((obj) => obj.id == id);
 
-        console.log(object_index);
+        // Eventually will want to call a "are you sure you want to delete window"
+        stored_projects.splice(object_index, 1);
+
+        this.projects = stored_projects;
+
+        localStorage.setItem(this.local_key, JSON.stringify(stored_projects));
+        this.display.display_projects(stored_projects, this.active_project);
     };
 
     add_todo(name, id, description, due_date, priority, completed) {
