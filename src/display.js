@@ -2,17 +2,20 @@ const project_container = document.querySelector(".project_container");
 const todo_container = document.querySelector(".todo_container");
 const current_project_display_text = document.querySelector(".current_project");
 const delete_project_button = document.querySelector(".delete_project_button");
+const total_todo_count = document.querySelector(".total_todo_count");
 
 export default class Display {
     constructor(
         handle_display_project_click,
         handle_todo_delete,
         delete_project,
+        switch_todo_completed_status,
     ) {
         this.local_key = "projects";
         this.handle_display_project_click = handle_display_project_click;
         this.handle_todo_delete = handle_todo_delete;
         this.delete_project = delete_project;
+        this.switch_todo_completed_status = switch_todo_completed_status;
 
         delete_project_button.addEventListener("click", () => {
             this.delete_project();
@@ -21,8 +24,6 @@ export default class Display {
 
     display_projects(projects, active_project) {
         project_container.innerHTML = "";
-
-        console.log(projects);
 
         for (let project of projects) {
             const project_button = document.createElement("button");
@@ -57,16 +58,22 @@ export default class Display {
 
         const current_project = projects.find((item) => item.id === project_id);
 
-        // todo_container.innerHTML = ``;
+        todo_container.innerHTML = ``;
 
-        // if (current_project.todos.length <= 0) {
-        //     const no_todo_text = document.createElement("p");
-        //     no_todo_text.textContent =
-        //         "No tasks found! Click the add button to start adding tasks.";
-        //     no_todo_text.classList.add("no_todo_text");
-        //     todo_container.appendChild(no_todo_text);
-        //     return;
-        // }
+        if (current_project.todos.length <= 0) {
+            const no_todo_text = document.createElement("p");
+            no_todo_text.textContent =
+                "No tasks found! Click the add button to start adding tasks.";
+            no_todo_text.classList.add("no_todo_text");
+            todo_container.appendChild(no_todo_text);
+            return;
+        }
+
+        const completed_task_int = current_project.todos.filter(
+            (todo) => todo.completed === true,
+        ).length;
+
+        total_todo_count.textContent = `Total Tasks: ${current_project.todos.length} | Total Completed Tasks: ${completed_task_int}`;
 
         for (let todo of current_project.todos) {
             const todo_display = document.createElement("div");
@@ -88,14 +95,26 @@ export default class Display {
 
             todo_display.appendChild(todo_priority_color_indicator);
 
+            const todo_checkbox = document.createElement("div");
+            todo_checkbox.classList.add("todo_checkbox");
+            todo_display.appendChild(todo_checkbox);
+
+            const custom_checkbox = document.createElement("label");
+            custom_checkbox.classList.add("custom-checkbox");
+            todo_checkbox.appendChild(custom_checkbox);
+
+            const checkbox_input = document.createElement("input");
+            checkbox_input.type = "checkbox";
+            checkbox_input.classList.add("checkbox_input");
+            custom_checkbox.appendChild(checkbox_input);
+
+            const checkmark = document.createElement("span");
+            checkmark.classList.add("checkmark");
+            custom_checkbox.appendChild(checkmark);
+
             const todo_content = document.createElement("div");
             todo_content.classList.add("todo_content");
             todo_display.appendChild(todo_content);
-
-            // NEED TO FIGURE THIS OUT.
-            const todo_checkbox = document.createElement("input");
-            todo_checkbox.type = "checkbox";
-            todo_content.appendChild(todo_checkbox);
 
             const todo_content_header = document.createElement("div");
             todo_content_header.classList.add("todo_content_header");
@@ -136,6 +155,54 @@ export default class Display {
                 </svg>
             `;
 
+            // CHECKBOX INPUTS
+            // This is where everything that goes into displaying the checkbox input will go
+            checkbox_input.addEventListener("click", () => {
+                if (checkbox_input.checked) {
+                    todo_title.style.textDecoration = "line-through";
+                    todo_title.style.color = "#4b5563";
+                    todo_content_description.style.textDecoration =
+                        "line-through";
+                    todo_content_description.style.color = "#4b5563";
+                    todo_due_date.style.textDecoration = "line-through";
+                    todo_due_date.style.color = "#4b5563";
+                    this.switch_todo_completed_status(
+                        todo.id,
+                        checkbox_input.checked,
+                    );
+                } else {
+                    todo_title.style.textDecoration = "none";
+                    todo_title.style.color = "#111";
+                    todo_content_description.style.textDecoration = "none";
+                    todo_content_description.style.color = "#111";
+                    todo_due_date.style.textDecoration = "none";
+                    todo_due_date.style.color = "#111";
+                    this.switch_todo_completed_status(
+                        todo.id,
+                        checkbox_input.checked,
+                    );
+                }
+            });
+
+            // Checks to see if the todo is completed, if completed will visually represent the completed todo
+            if (todo.completed == true) {
+                todo_title.style.textDecoration = "line-through";
+                todo_title.style.color = "#4b5563";
+                todo_content_description.style.textDecoration = "line-through";
+                todo_content_description.style.color = "#4b5563";
+                todo_due_date.style.textDecoration = "line-through";
+                todo_due_date.style.color = "#4b5563";
+                checkbox_input.checked = true;
+            } else {
+                todo_title.style.textDecoration = "none";
+                todo_title.style.color = "#111";
+                todo_content_description.style.textDecoration = "none";
+                todo_content_description.style.color = "#111";
+                todo_due_date.style.textDecoration = "none";
+                todo_due_date.style.color = "#111";
+            }
+
+            // Todo delete button
             todo_delete_button.addEventListener("click", () => {
                 todo_display.classList.add("deleting");
 

@@ -80,3 +80,16 @@ add_task_button.addEventListener("click", () => {
         console.log(err);
     }
 });
+
+document.addEventListener("keydown", (e) => {
+    const tag = e.target.tagName;
+
+    if (tag === "INPUT" || tag === "TEXTAREA" || e.target.isContentEditable) {
+        return;
+    }
+    if (e.key == "a") {
+        toggle_create_task_popup();
+    } else if (e.key == "p") {
+        toggle_create_project_popup();
+    }
+});

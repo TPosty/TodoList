@@ -333,6 +333,7 @@ nav {
         margin 0.25s ease,
         padding 0.25s ease;
     opacity: 1;
+    gap: 8px;
 }
 
 .todo.deleting {
@@ -359,6 +360,8 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+    width: 90%;
 }
 
 .todo_content_header {
@@ -371,10 +374,11 @@ nav {
 }
 
 .todo_checkbox {
-    width: 8%;
+    width: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 10px;
 }
 
 /* Container */
@@ -385,7 +389,7 @@ nav {
 }
 
 /* Hide native checkbox but keep it accessible */
-.custom-checkbox input {
+.custom-checkbox .checkbox_input {
     position: absolute;
     opacity: 0;
     pointer-events: none;
@@ -412,20 +416,21 @@ nav {
     border-width: 0 2px 2px 0;
     transform: rotate(45deg) scale(0);
     transition: transform 0.15s ease;
+    margin-top: -3px;
 }
 
 /* Checked state */
-.custom-checkbox input:checked + .checkmark {
+.custom-checkbox .checkbox_input:checked + .checkmark {
     background-color: #747b9e;
     border-color: #747b9e;
 }
 
-.custom-checkbox input:checked + .checkmark::after {
+.custom-checkbox .checkbox_input:checked + .checkmark::after {
     transform: rotate(45deg) scale(1);
 }
 
 /* Focus state (keyboard users) */
-.custom-checkbox input:focus-visible + .checkmark {
+.custom-checkbox .checkbox_input:focus-visible + .checkmark {
     outline: 2px solid #6366f1;
     outline-offset: 2px;
 }
@@ -442,6 +447,7 @@ nav {
 
 .todo_delete_button {
     min-width: 100px;
+    height: 100%;
     background-color: #747b9e;
     border: none;
     cursor: pointer;
@@ -450,11 +456,23 @@ nav {
     border-bottom-right-radius: 6px;
 }
 
-/* Current project header stuff */
 .current_project_header {
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
+}
+
+.total_todo_count {
+    font-size: 20px !important;
+    margin-top: 0px;
+}
+
+.left_header {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    flex: 6;
 }
 
 .current_project {
@@ -462,35 +480,42 @@ nav {
 }
 
 .delete_project_button {
-    background-color: transparent;
+    background: transparent;
     border: none;
     color: #4b5563;
-    padding: 8px 16px;
+    padding: 8px;
     border-radius: 6px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 16px;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+/* Filter Buttons */
+
+.filter_buttons {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Filter Buttons */
-.filter_buttons {
+.filter_button {
+    padding: 6px 10px;
+    background-color: #e2e8f0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    gap: 10px;
 }
 
-.filter_button {
-    padding: 6px 10px 6px 10px;
-    background-color: transparent;
-    border: none;
-    background-color: #e2e8f0;
-    color: #1f2937;
-    cursor: pointer;
+.total_todo_count {
+    font-size: 0.9rem;
+    color: #374151;
+}
+
+.add_todo {
+    padding: 10px 16px;
+    font-size: 0.95rem;
     border-radius: 6px;
 }
 
@@ -576,10 +601,24 @@ nav {
     align-items: center;
 }
 
+.actual_filter_buttons {
+    display: flex;
+    gap: 10px;
+}
+
 /* Responsive */
-@media (max-width: 600px) {
+@media (max-width: 700px) {
+    .todo_checkbox {
+        margin-top: 10px;
+    }
+
     .todo {
         flex-direction: column;
+    }
+
+    .add_todo {
+        width: 100%;
+        text-align: center;
     }
 
     .todo_priority_color_indicator {
@@ -599,5 +638,66 @@ nav {
     .todo_content_header {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .left_header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .content_header {
+        flex-direction: column;
+    }
+
+    .current_project {
+        font-size: 30px;
+    }
+
+    .filter_buttons {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .total_todo_count {
+        font-size: 20px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .todo_content_header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .todo_due_date {
+        font-size: 0.85rem;
+    }
+
+    .todo {
+        padding-right: 6px;
+    }
+
+    .current_project_header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .left_header {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .add_todo {
+        align-self: flex-start;
     }
 }

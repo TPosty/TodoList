@@ -11,11 +11,14 @@ export default class Project {
             this.handle_display_project_click.bind(this);
 
         this.delete_project = this.delete_project.bind(this);
+        this.switch_todo_completed_status =
+            this.switch_todo_completed_status.bind(this);
 
         this.display = new Display(
             this.handle_display_project_click,
             this.delete_todo,
             this.delete_project,
+            this.switch_todo_completed_status,
         );
 
         let projects = JSON.parse(localStorage.getItem(this.local_key));
@@ -42,7 +45,6 @@ export default class Project {
         }
 
         filter_buttons.forEach((button) => {
-            console.log(button.dataset.filter);
             button.addEventListener("click", (e) => {
                 filter_buttons.forEach((btn) => btn.classList.remove("active"));
                 e.currentTarget.classList.add("active");
@@ -57,6 +59,35 @@ export default class Project {
             });
         });
     }
+
+    switch_todo_completed_status = (id, type) => {
+        const stored_projects = JSON.parse(
+            localStorage.getItem(this.local_key),
+        );
+
+        const object_index = stored_projects.findIndex(
+            (obj) => obj.id == this.active_project.id,
+        );
+
+        // Need to find the index of the changed todo (completed status) --> splice at that index --> add todo to the end of the array
+
+        const todo_index = stored_projects[object_index].todos.findIndex(
+            (todo) => todo.id == id,
+        );
+
+        // const completed_task = stored_projects[object_index].todos.splice(
+        //     todo_index,
+        //     1,
+        // );
+
+        // stored_projects[object_index].todos.push(completed_task);
+
+        stored_projects[object_index].todos[todo_index].completed =
+            !stored_projects[object_index].todos[todo_index].completed;
+
+        localStorage.setItem(this.local_key, JSON.stringify(stored_projects));
+        this.display.display_project_todos(this.active_project.id);
+    };
 
     filter_todos = (filter_type) => {
         const stored_projects = JSON.parse(
