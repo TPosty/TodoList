@@ -1,6 +1,5 @@
 import "./styles.css";
 import Project from "./project.js";
-import Display from "./display.js";
 
 const create_project_button = document.querySelector(".create_project_button");
 const project_name_text = document.querySelector(".project_name_text");
@@ -59,11 +58,52 @@ close_popup_btn_task.addEventListener("click", () => {
 
 create_project_button.addEventListener("click", () => {
     const project_name = project_name_text.value;
+
+    if (!project_name) {
+        project_name_text.classList.add("input_error");
+        return;
+    } else {
+        project_name_text.classList.remove("input_error");
+    }
+
     project_instance.create_project(project_name);
     toggle_create_project_popup();
 });
 
 add_task_button.addEventListener("click", () => {
+    const input_errors = {
+        name: false,
+        due_date: false,
+        priority: false,
+    };
+
+    if (!task_name.value || task_name.value.length <= 1) {
+        input_errors.name = true;
+        task_name.classList.add("input_error");
+    } else {
+        task_name.classList.remove("input_error");
+    }
+
+    if (!task_due_date.value) {
+        input_errors.due_date = true;
+        task_due_date.classList.add("input_error");
+    } else {
+        task_due_date.classList.remove("input_error");
+    }
+
+    console.log(task_priority.value);
+
+    if (!task_priority.value) {
+        input_errors.priority = true;
+        task_priority.classList.add("input_error");
+    } else {
+        task_priority.classList.remove("input_error");
+    }
+
+    if (input_errors.name || input_errors.due_date || input_errors.priority) {
+        return;
+    }
+
     try {
         project_instance.add_todo(
             task_name.value,

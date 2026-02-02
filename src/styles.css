@@ -606,6 +606,10 @@ nav {
     gap: 10px;
 }
 
+.input_error {
+    border: 1px solid red !important;
+}
+
 /* Responsive */
 @media (max-width: 700px) {
     .todo_checkbox {

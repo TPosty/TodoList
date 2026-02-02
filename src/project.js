@@ -150,7 +150,6 @@ export default class Project {
 
     delete_project = () => {
         const id = this.active_project.id;
-        console.log(id);
 
         const stored_projects = JSON.parse(
             localStorage.getItem(this.local_key),

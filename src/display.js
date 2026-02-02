@@ -53,12 +53,37 @@ export default class Display {
         project_container.appendChild(no_projects);
     }
 
-    display_project_todos(project_id) {
-        const projects = JSON.parse(localStorage.getItem(this.local_key));
+    render_task_numbers = (project_id) => {
+        const projects = JSON.parse(localStorage.getItem(this.local_key)) || [];
 
-        const current_project = projects.find((item) => item.id === project_id);
+        let current_project = projects.find((item) => item.id === project_id);
+
+        const completed_task_int = current_project.todos.filter(
+            (todo) => todo.completed === true,
+        ).length;
+
+        total_todo_count.textContent = `Total Tasks: ${current_project.todos.length} | Total Completed Tasks: ${completed_task_int}`;
+    };
+
+    display_project_todos(project_id) {
+        const projects = JSON.parse(localStorage.getItem(this.local_key)) || [];
+
+        let current_project = projects.find((item) => item.id === project_id);
+
+        if (!current_project) {
+            const fallback_project = projects[0];
+
+            if (!fallback_project) {
+                todo_container.innerHTML = "<p>No projects found.</p>";
+                return;
+            }
+
+            current_project = fallback_project;
+        }
 
         todo_container.innerHTML = ``;
+
+        this.render_task_numbers(current_project.id);
 
         if (current_project.todos.length <= 0) {
             const no_todo_text = document.createElement("p");
@@ -68,12 +93,6 @@ export default class Display {
             todo_container.appendChild(no_todo_text);
             return;
         }
-
-        const completed_task_int = current_project.todos.filter(
-            (todo) => todo.completed === true,
-        ).length;
-
-        total_todo_count.textContent = `Total Tasks: ${current_project.todos.length} | Total Completed Tasks: ${completed_task_int}`;
 
         for (let todo of current_project.todos) {
             const todo_display = document.createElement("div");
